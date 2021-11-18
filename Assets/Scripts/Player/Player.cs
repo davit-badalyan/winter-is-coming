@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public bool hasSnowball = false;
+    public float speed = 15.0f;
     public InputHandler inputHandler;
     public MovementHandler movementHandler;
     public Vector3 startPosition = new Vector3(0, 3, 0);
+
+    public GameObject snowball { get; private set; }
 
     private void Resume()
     {
@@ -16,28 +17,26 @@ public class Player : MonoBehaviour
         gameObject.transform.rotation = Quaternion.identity;
     }
 
-    private void CheckForSnowball(GameObject snowball)
+    private void CheckForSnowball(GameObject newSnowball)
     {
-        if (hasSnowball)
+        if (snowball)
         {
             return;
         } else
         {
-            PickUpSnowball(snowball);
+            PickUpSnowball(newSnowball);
         }
     }
 
-    private void PickUpSnowball(GameObject snowball)
+    private void PickUpSnowball(GameObject newSnowball)
     {
-        hasSnowball = true;
-
         string newParentObjectName = "SnowballPoint";
         string newParentLocation = "/" + gameObject.name + "/" + newParentObjectName;
         GameObject nweParentObject = GameObject.Find(newParentLocation);
 
-        snowball.transform.SetParent(nweParentObject.transform);
-        snowball.transform.position = nweParentObject.transform.position;
-
+        snowball = newSnowball;
+        newSnowball.transform.SetParent(nweParentObject.transform);
+        newSnowball.transform.position = nweParentObject.transform.position;
     }
 
     private  void Start()

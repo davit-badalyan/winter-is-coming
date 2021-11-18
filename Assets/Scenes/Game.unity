@@ -944,8 +944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75091d1e4b2fdb44b823f5cb1eab5c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  hasSnowball: 0
+  speed: 15
   inputHandler: {fileID: 999612925}
   movementHandler: {fileID: 999612924}
   startPosition: {x: 0, y: 3, z: 0}

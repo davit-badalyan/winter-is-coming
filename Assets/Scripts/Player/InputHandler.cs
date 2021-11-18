@@ -8,10 +8,25 @@ public class InputHandler : MonoBehaviour
     private float sideMovement;
     private float forwardMovement;
 
-    private void CheckForInputs()
+    private void CheckForMovement()
     {
         sideMovement = Input.GetAxisRaw("Horizontal");
         forwardMovement = Input.GetAxisRaw("Vertical");
+    }
+
+    private void CheckForSnowballThrowing()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && player.snowball)
+        {
+            ThrowSnowball();
+        }
+    }
+
+    private void ThrowSnowball()
+    {
+        // ToDo 
+        // Implement snowball throwing
+        Destroy(player.snowball);
     }
 
     private void Start()
@@ -21,7 +36,8 @@ public class InputHandler : MonoBehaviour
 
     private void Update()
     {
-        CheckForInputs();
+        CheckForMovement();
+        CheckForSnowballThrowing();
     }
 
     private void LateUpdate()
