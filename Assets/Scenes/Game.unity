@@ -549,9 +549,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ce1c1386fe9924ab8a95fb4301b6cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snowBallsParent: {fileID: 990357463}
-  snowBallPrefab: {fileID: 5770228118299571912, guid: f7da7b125a5e3eb4aa45ea5a539bb141, type: 3}
   snowBallCount: 20
+  snowBallPrefab: {fileID: 5770228118299571912, guid: f7da7b125a5e3eb4aa45ea5a539bb141, type: 3}
+  snowBallsParent: {fileID: 990357463}
 --- !u!4 &590228577
 Transform:
   m_ObjectHideFlags: 0
@@ -850,8 +850,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d0fc9e3ade9704aaa017225df7c040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 999612923}
   angle: 45
+  player: {fileID: 999612923}
   offset: {x: 0, y: 12, z: -10}
 --- !u!1 &990357463
 GameObject:
@@ -945,6 +945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  hasSnowball: 0
   inputHandler: {fileID: 999612925}
   movementHandler: {fileID: 999612924}
   startPosition: {x: 0, y: 3, z: 0}
@@ -1021,7 +1022,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2023924143}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1460,3 +1462,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870947710}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2023924142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2023924143}
+  m_Layer: 0
+  m_Name: SnowballPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2023924143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023924142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999612930}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
