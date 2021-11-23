@@ -5,8 +5,8 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     public Player player;
-    private float sideMovement;
-    private float forwardMovement;
+    public float sideMovement;
+    public float forwardMovement;
 
     private void CheckForMovement()
     {
@@ -16,17 +16,10 @@ public class InputHandler : MonoBehaviour
 
     private void CheckForSnowballThrowing()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && player.snowball)
+        if (Input.GetKeyDown(KeyCode.Space) && player.snowballPoint.Find("PlayerSnowball"))
         {
-            ThrowSnowball();
+            player.ThrowSnowball();
         }
-    }
-
-    private void ThrowSnowball()
-    {
-        // ToDo 
-        // Implement snowball throwing
-        Destroy(player.snowball);
     }
 
     private void Start()
@@ -38,10 +31,5 @@ public class InputHandler : MonoBehaviour
     {
         CheckForMovement();
         CheckForSnowballThrowing();
-    }
-
-    private void LateUpdate()
-    {
-        player.movementHandler.Move(forwardMovement, sideMovement);
     }
 }

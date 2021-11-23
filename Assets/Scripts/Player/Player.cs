@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 15.0f;
+    public Transform snowballPoint;
+    public Transform thrownSnoballs;
     public InputHandler inputHandler;
     public MovementHandler movementHandler;
     public Vector3 startPosition = new Vector3(0, 3, 0);
 
-    public GameObject snowball { get; private set; }
 
-    private void Resume()
+    public void ThrowSnowball()
     {
-        gameObject.transform.position = startPosition;
-        gameObject.transform.rotation = Quaternion.identity;
+        GameObject snowball = snowballPoint.Find("PlayerSnowball").gameObject;
+        snowball.transform.SetParent(thrownSnoballs.transform);
+
+        snowball.AddComponent<Rigidbody>();
+        snowball.GetComponent<Rigidbody>().AddForce(transform.TransformDirection(Vector3.forward) * 1000);
+
     }
 
     private void CheckForSnowball(GameObject newSnowball)
     {
-        if (snowball)
+        if (snowballPoint.Find("PlayerSnowball"))
         {
             return;
-        } else
+        }
+        else
         {
             PickUpSnowball(newSnowball);
         }
@@ -30,24 +35,36 @@ public class Player : MonoBehaviour
 
     private void PickUpSnowball(GameObject newSnowball)
     {
-        string newParentObjectName = "SnowballPoint";
-        string newParentLocation = "/" + gameObject.name + "/" + newParentObjectName;
-        GameObject nweParentObject = GameObject.Find(newParentLocation);
-
-        snowball = newSnowball;
-        newSnowball.transform.SetParent(nweParentObject.transform);
-        newSnowball.transform.position = nweParentObject.transform.position;
+        newSnowball.name = "PlayerSnowball";
+        newSnowball.transform.SetParent(snowballPoint);
+        newSnowball.transform.position = snowballPoint.transform.position;
     }
 
-    private  void Start()
+    private void DrawRaycast()
+    {
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100, Color.white);
+    }
+
+    private void Resume()
+    {
+        gameObject.transform.position = startPosition;
+        gameObject.transform.rotation = Quaternion.identity;
+    }
+
+    private void Start()
     {
         Resume();
     }
 
     private void Update()
     {
-        //
+        DrawRaycast();
     }
+    private void LateUpdate()
+    {
+        movementHandler.Move(inputHandler.forwardMovement, inputHandler.sideMovement);
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
