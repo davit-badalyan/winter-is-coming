@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,8 @@ public class Player : MonoBehaviour
     public void ThrowSnowball()
     {
         GameObject snowball = snowballPoint.Find("PlayerSnowball").gameObject;
-        snowball.transform.SetParent(thrownSnoballs.transform);
 
+        snowball.transform.SetParent(thrownSnoballs.transform);
         snowball.AddComponent<Rigidbody>();
         snowball.GetComponent<Rigidbody>().AddForce(transform.TransformDirection(Vector3.forward) * 1000);
 
@@ -23,14 +24,9 @@ public class Player : MonoBehaviour
 
     private void CheckForSnowball(GameObject newSnowball)
     {
-        if (snowballPoint.Find("PlayerSnowball"))
-        {
-            return;
-        }
-        else
-        {
-            PickUpSnowball(newSnowball);
-        }
+        Transform snowball = snowballPoint.Find("PlayerSnowball");
+
+        if (!snowball) PickUpSnowball(newSnowball);
     }
 
     private void PickUpSnowball(GameObject newSnowball)
@@ -68,10 +64,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.transform.tag)
+        string tag = other.transform.tag;
+        GameObject gameObject = other.gameObject;
+
+        switch (tag)
         {
             case "Snowball":
-                CheckForSnowball(other.gameObject);
+                CheckForSnowball(gameObject);
                 break;
             default:
                 break;

@@ -6,12 +6,23 @@ public class Snowball : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.transform.tag)
+        string tag = other.transform.tag;
+
+        switch (tag)
         {
             case "Player":
-                //
+                // ToDo
+                break;
+            case "Snowball":
+                // ToDo
+                break;
+            case "Enemy":
+                // Destroy enemy and snowball
+                Destroy(gameObject);
+                Destroy(other.gameObject);
                 break;
             default:
+                // Destroy snowball
                 Destroy(gameObject);
                 break;
         }

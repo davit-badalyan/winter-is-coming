@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public int snowBallCount = 10;
+    public int enemyCount = 5;
+    public int snowBallCount = 20;
+    public GameObject enemyPrefab;
+    public GameObject enemyParent;
     public GameObject snowBallPrefab;
     public GameObject snowBallsParent;
 
@@ -16,10 +19,19 @@ public class SpawnManager : MonoBehaviour
             Instantiate(snowBallPrefab, position, Quaternion.identity, snowBallsParent.transform);
         }
     }
+    public void SpawnEnemies()
+    {
+        for (int i = 0; i < enemyCount; i++)
+        {
+            Vector3 position = new Vector3(Random.Range(-45.0F, 45.0F), 3.0f, Random.Range(-45.0F, 45.0F));
+            Instantiate(enemyPrefab, position, Quaternion.identity, enemyParent.transform);
+        }
+    }
 
     private void Start()
     {
         SpawnSnowballs();
+        SpawnEnemies();
     }
 
     private void Update()

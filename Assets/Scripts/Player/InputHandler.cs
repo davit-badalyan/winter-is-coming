@@ -16,7 +16,10 @@ public class InputHandler : MonoBehaviour
 
     private void CheckForSnowballThrowing()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && player.snowballPoint.Find("PlayerSnowball"))
+        bool spacePressed = Input.GetKeyDown(KeyCode.Space);
+        bool snowball = player.snowballPoint.Find("PlayerSnowball");
+
+        if (spacePressed && snowball)
         {
             player.ThrowSnowball();
         }
