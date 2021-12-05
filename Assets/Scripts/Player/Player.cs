@@ -56,11 +56,6 @@ public class Player : MonoBehaviour
     {
         DrawRaycast();
     }
-    private void LateUpdate()
-    {
-        movementHandler.Move(inputHandler.forwardMovement, inputHandler.sideMovement);
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {

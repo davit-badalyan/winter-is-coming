@@ -5,24 +5,11 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     public Player player;
-    public float sideMovement;
-    public float forwardMovement;
 
-    private void CheckForMovement()
+    public void CheckForSnowballThrowing()
     {
-        sideMovement = Input.GetAxisRaw("Horizontal");
-        forwardMovement = Input.GetAxisRaw("Vertical");
-    }
-
-    private void CheckForSnowballThrowing()
-    {
-        bool spacePressed = Input.GetKeyDown(KeyCode.Space);
         bool snowball = player.snowballPoint.Find("PlayerSnowball");
-
-        if (spacePressed && snowball)
-        {
-            player.ThrowSnowball();
-        }
+        if (snowball) player.ThrowSnowball();
     }
 
     private void Start()
@@ -32,7 +19,6 @@ public class InputHandler : MonoBehaviour
 
     private void Update()
     {
-        CheckForMovement();
-        CheckForSnowballThrowing();
+        //
     }
 }
