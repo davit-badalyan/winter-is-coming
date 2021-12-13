@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    public int angle = 45;
+    public float angle = 55;
     public GameObject player;
-    public Vector3 offset = new Vector3(0, 12, -10);
+    public Vector3 offset = new Vector3(0, 30, -20);
 
     void LateUpdate()
     {

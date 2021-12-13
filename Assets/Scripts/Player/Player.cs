@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Transform detectArea;
     public Transform snowballPoint;
     public Transform thrownSnoballs;
     public InputHandler inputHandler;
@@ -14,11 +15,32 @@ public class Player : MonoBehaviour
 
     public void ThrowSnowball()
     {
+        float force = 1000;
+        float forceMultiplier = 100;
+        float radius = detectArea.transform.localScale.x / 2;
+
+        Vector3 direction = Vector3.forward * force;
         GameObject snowball = snowballPoint.Find("PlayerSnowball").gameObject;
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, radius);
+
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.tag == "Enemy")
+            {
+                Vector3 relativePos = hitCollider.transform.position - gameObject.transform.position;
+                Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+
+                float distacneBetween = Vector3.Distance(hitCollider.transform.position, gameObject.transform.position);
+                force = distacneBetween * forceMultiplier;
+                direction = new Vector3(0, 0, force);
+
+                transform.rotation = rotation;
+            }
+        }
 
         snowball.transform.SetParent(thrownSnoballs.transform);
         snowball.AddComponent<Rigidbody>();
-        snowball.GetComponent<Rigidbody>().AddForce(transform.TransformDirection(Vector3.forward) * 1000);
+        snowball.GetComponent<Rigidbody>().AddForce(transform.TransformDirection(direction));
 
     }
 
